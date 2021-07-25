@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import { fetchDeleteUser, fetchUsers } from '../redux/user/userActions'
 import User from './User'
+import UserForm from './UserForm'
 
 
 
@@ -27,6 +28,7 @@ function UserContainer() {
             {users?.map(user=>{
                return <User key={user.id} deleteUser = {deleteUser} user={user}/> 
             })}
+            <UserForm/>
         </div>
     )
 }

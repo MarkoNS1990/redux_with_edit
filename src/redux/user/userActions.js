@@ -1,5 +1,5 @@
 import axios from "axios"
-import { DELETE_USER, EDIT_USER, FETCH_USERS_BEGIN, FETCH_USERS_FAILURE, FETCH_USERS_SUCCESS } from "./userActionTypes"
+import { ADD_USER, DELETE_USER, EDIT_USER, FETCH_USERS_BEGIN, FETCH_USERS_FAILURE, FETCH_USERS_SUCCESS } from "./userActionTypes"
 
 export const fetchUsersBegin = ()=>{
     return {
@@ -18,6 +18,13 @@ export const fetchUsersFailure = (error)=>{
     return {
         type:FETCH_USERS_FAILURE,
         payload:error
+    }
+}
+
+export const addUser = (user)=>{
+    return{
+        type:ADD_USER,
+        payload:user
     }
 }
 
@@ -65,4 +72,14 @@ export const fetchEditUser = (user)=>{
         .then(res=>dispatch(editUser(user)))
         .catch(error=>fetchUsersFailure(error))
     }
+}
+
+export const fetchAddUser = (user)=>{
+    return(dispatch)=>{
+        dispatch(fetchUsersBegin)
+        axios.post(`https://jsonplaceholder.typicode.com/users`,{user})
+        .then(res=>dispatch(addUser(user)))
+        .catch(error=>fetchUsersFailure(error))
+    }
+    
 }
