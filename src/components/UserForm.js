@@ -8,9 +8,11 @@ function UserForm() {
     const dispatch = useDispatch()
 
     const onAddUser = ()=>{
-        const user = {id:users.length+1,name:name}
+        const lastUser = users[users.length-1]
+        const user = {id:lastUser.id+1,name:name}
         console.log(user)
         dispatch(fetchAddUser(user))
+        setName('')
     }
 
     return (
